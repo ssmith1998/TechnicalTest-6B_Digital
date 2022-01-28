@@ -18,16 +18,6 @@ class BookingController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,7 +25,20 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'booking_date' => 'required',
+            'flexibility' => 'required',
+            'vehicle_size' => 'required',
+            'contact_number' => 'required',
+            'email_address' => 'required'
+        ];
+
+        $this->validate($request, $rules);
+
+        $booking = Booking::create($request->input());
+
+        return view('index', ['booking' => $booking]);
     }
 
     /**
