@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +22,11 @@ Route::get('/', function () {
 });
 
 Route::post('/bookings', [BookingController::class, 'store']);
+Route::get('admin/login', [AuthController::class, 'showLoginForm'])->name('adminLogin');
+Route::post('login', [AuthController::class, 'login']);
+Route::middleware('auth')->group(function () {
+    Route::get('admin/dashboard', [DashboardController::class, 'index']);
+    Route::get('admin/booking', [AdminBookingController::class, 'bookingForm']);
+    Route::post('admin/bookings', [AdminBookingController::class, 'store']);
+    Route::put('admin/bookings/{booking}', [AdminBookingController::class, 'update']);
+});

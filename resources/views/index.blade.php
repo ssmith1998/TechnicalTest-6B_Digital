@@ -25,7 +25,7 @@
     </div>
 @endif
 @if (!isset($booking))
-<form action="/bookings" method="post" class="booking_form">
+<form action="/bookings" method="post" class="booking_form p-5">
         @csrf
         <h4 class="text-center py-3 text-white">Booking Form</h4>
         <div class="row">
@@ -69,7 +69,7 @@
 </form>
 
 @else
-<form action="/bookings" method="post" class="booking_confirmed">
+<form action="/bookings" method="post" class="booking_confirmed p-5">
         @csrf
         <h4 class="text-center py-3 text-white">Booking Confirmed</h4>
         <div class="row">

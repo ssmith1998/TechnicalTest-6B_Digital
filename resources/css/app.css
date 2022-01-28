@@ -19,3 +19,13 @@
     justify-content: center;
     align-items: center;
 }
+
+.adminAuthWrapper {
+    height: 100vh;
+}
+
+.login-form {
+    width: 75%;
+    background-color: #0390fc;
+    margin: 0 auto;
+}

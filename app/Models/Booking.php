@@ -17,4 +17,8 @@ class Booking extends Model
         'contact_number',
         'email_address'
     ];
+
+    protected $dates = [
+        'booking_date'
+    ];
 }
