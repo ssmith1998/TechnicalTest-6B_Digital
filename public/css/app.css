@@ -1,4 +1,5 @@
-.booking_form {
+.booking_form,
+.choices_form {
     width: 75%;
     background-color: #0390fc;
     padding: 10px;

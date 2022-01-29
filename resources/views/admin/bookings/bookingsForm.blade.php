@@ -1,7 +1,15 @@
 @extends('admin.base')
-
+@section('content')
 <h1 class="text-center py-3">{{$type}} Booking</h1>
-
+@if ($errors->any())
+    <div class="alert alert-danger w-75">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 @if (isset($data))
 <form action="/admin/bookings/{{$data->id}}" method="post" class="booking_form p-5">
         @csrf
@@ -117,3 +125,5 @@
 
 </form>
 @endif
+
+@endsection

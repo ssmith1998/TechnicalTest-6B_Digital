@@ -15,8 +15,7 @@ class DashboardController extends Controller
 
         if (Auth::check()) {
             $bookings = Booking::orderBy('created_at', 'desc')->paginate(5);
-            $choices = SelectChoice::orderBy('created_at', 'desc')->paginate(5);
-            return view('admin.dashboard', ['bookings' => $bookings, 'choices' => $choices]);
+            return view('admin.dashboard', ['bookings' => $bookings]);
         } else {
             return redirect('/admin/login');
         }

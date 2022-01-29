@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
+use App\Http\Controllers\SelectChoiceController;
+use App\Models\SelectChoice;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,9 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    $flexChoices = SelectChoice::where('type', 'flexibility')->get();
+    $sizeChoices = SelectChoice::where('type', 'vehicle_size')->get();
+    return view('index', ['flexChoices' => $flexChoices, 'sizeChoices' => $sizeChoices]);
 });
 
 Route::post('/bookings', [BookingController::class, 'store']);
@@ -32,4 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/bookings/confirm/{booking}', [AdminBookingController::class, 'setConfirmed']);
     Route::get('admin/bookings/delete/{booking}', [AdminBookingController::class, 'destroy']);
     Route::get('admin/logout', [AuthController::class, 'logout']);
+    Route::get('admin/choices/form', [SelectChoiceController::class, 'choiceForm']);
+    Route::get('admin/choices', [SelectChoiceController::class, 'index']);
+    Route::post('admin/choices', [SelectChoiceController::class, 'store']);
+    Route::post('admin/choices/{choice}', [SelectChoiceController::class, 'update']);
+    Route::get('admin/choices/delete/{choice}', [SelectChoiceController::class, 'destroy']);
 });

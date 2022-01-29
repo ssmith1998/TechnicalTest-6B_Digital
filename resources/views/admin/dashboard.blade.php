@@ -5,11 +5,14 @@
 <div class="top_toolbar__wrapper d-flex justify-content-between">
 <h1 class="text-bold">Dashboard</h1>
 <a href="/admin/logout"><button class="btn btn-danger">Logout</button></a>
-
 </div>
 <div class="toolbar d-flex justify-content-between">
 <h4>Bookings</h4>
+<div class="actions__wrapper">
 <a href="/admin/booking?type=Add"><button class="btn btn-success">Add Booking</button></a> 
+<a href="/admin/choices"><button class="btn btn-primary">View Select Choices</button></a>
+</div>
+
 </div>
 @if(session()->has('success'))
     <div class="alert alert-success">
@@ -70,37 +73,6 @@
 </table>   
 <div class="pagination d-flex justify-content-center">
 {{ $bookings->links() }}
-</div>
-
-<div class="selectOptions">
-<div class="toolbar__choices d-flex justify-content-between">
-<h4>Choices</h4>
-<a href="/admin/choices/add"><button class="btn btn-success">Add Choice</button></a>
-</div>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Label</th>
-      <th scope="col">Value</th>
-      <th scope="col">Type</th>
-    </tr>
-  </thead>
-  <tbody>
-  @if(isset($choices) && COUNT($choices) > 0)
-  @foreach ($choices as $choice )
-    <tr>
-      <td>{{$choice->label}}</td>
-      <td>{{$choice->value}}</td>
-      <td>{{$choice->type}}</td>
-    </tr>
-  @endforeach
-  @else
-   <tr>
-      <td><p>There are no records to show</p></td>
-    </tr>
-  @endif
-  </tbody>
-</table>
 </div>
 
 </div>

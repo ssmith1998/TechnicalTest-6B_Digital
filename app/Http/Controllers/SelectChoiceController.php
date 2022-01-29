@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 
 class SelectChoiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $choices = SelectChoice::orderBy('created_at', 'desc')->paginate(5);
+
+        return view('admin.choices.choices', ['choices' => $choices]);
     }
 
     /**
@@ -22,9 +20,14 @@ class SelectChoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function choiceForm(Request $request)
     {
-        //
+        if ($request->type === 'Edit'  && $request->has('choice')) {
+            $data = SelectChoice::find($request->choice);
+        } else {
+            $data = null;
+        }
+        return view('admin.choices.choiceForm', ['type' => $request->type, 'data' => $data]);
     }
 
     /**
@@ -35,27 +38,26 @@ class SelectChoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'label' => 'required',
+            'value' => 'required',
+            'type' => 'required',
+        ];
+
+        $this->validate($request, $rules);
+
+        $booking = SelectChoice::create($request->input());
+
+        return redirect('/admin/choices')->with('success', 'Select Choice Created Succesfully!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SelectChoice  $selectChoice
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SelectChoice $selectChoice)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SelectChoice  $selectChoice
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SelectChoice $selectChoice)
+    public function show($id)
     {
         //
     }
@@ -64,22 +66,34 @@ class SelectChoiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SelectChoice  $selectChoice
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SelectChoice $selectChoice)
+    public function update(Request $request, SelectChoice $choice)
     {
-        //
+        $rules = [
+            'label' => 'required',
+            'value' => 'required',
+            'type' => 'required',
+        ];
+
+        $this->validate($request, $rules);
+
+        $booking = $choice->update($request->input());
+
+        return redirect('/admin/choices')->with('success', 'Select Choice Updated Succesfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\SelectChoice  $selectChoice
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SelectChoice $selectChoice)
+    public function destroy(SelectChoice $choice)
     {
-        //
+        $choice->delete();
+
+        return redirect('/admin/choices')->with('success', 'Select Choice Deleted Succesfully!');
     }
 }

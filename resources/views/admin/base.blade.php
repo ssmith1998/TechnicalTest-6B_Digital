@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" type="text/css">
 </head>
 <body>
-<div class="adminWrapper d-flex flex-column justify-content-center align-items-center">
+<div class="adminWrapper d-flex flex-column justify-content-center align-items-center vh-100">
 @yield('content')
 </div>
 </body>

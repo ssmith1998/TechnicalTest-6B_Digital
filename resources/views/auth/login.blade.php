@@ -18,7 +18,7 @@
    <input type="email" class="form-control" placeholder="Email" name="email" required>
    </div>
    <div class="col-xs-12 col-sm-6">
-   <input type="text" class="form-control" placeholder="Password" name="password" required>
+   <input type="password" class="form-control" placeholder="Password" name="password" required>
    </div>
 
    <div class="col-xs-12 text-center pt-3">

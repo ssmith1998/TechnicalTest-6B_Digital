@@ -36,21 +36,39 @@
         <input class="form-control" name="booking_date" type="date" placeholder="Booking Date">
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
-        <select class="form-control" name="flexibility" id="flexibility">
-        <option value="0">Flexibility</option>
-        <option value="1">+/- 1 day</option>
-        <option value="2">+/- 2 day</option>
-        <option value="3">+/- 3 day</option>
-        </select>
+        @if (isset($flexChoices) && COUNT($flexChoices) > 0)
+         <select class="form-control" name="flexibility" id="flexibility">
+            <option value="0">Flexibility</option>
+            @foreach ( $flexChoices as $flex)
+            <option value="{{$flex->value}}">{{$flex->label}}</option>
+            @endforeach
+            </select>
+        @else   
+         <select class="form-control" name="flexibility" id="flexibility">
+            <option value="0">Flexibility</option>
+            <option value="1">+/- 1 day</option>
+            <option value="2">+/- 2 day</option>
+            <option value="3">+/- 3 day</option>
+            </select> 
+        @endif
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
-        <select class="form-control" name="vehicle_size" id="vehicle_size">
-        <option value="size">Vehicle Size</option>
-        <option value="small">small</option>
-        <option value="medium">medium</option>
-        <option value="large">Large</option>
-        <option value="van">Van</option>
-        </select>
+       @if (isset($sizeChoices) && COUNT($sizeChoices) > 0)
+                    <select class="form-control" name="vehicle_size" id="vehicle_size">
+                    <option value="size">Vehicle Size</option>
+                    @foreach ($sizeChoices as $size)
+                    <option value="{{$size->value}}">{{$size->label}}</option>
+                    @endforeach
+                    </select>
+                    @else
+                    <select class="form-control" name="vehicle_size" id="vehicle_size">
+                    <option value="size">Vehicle Size</option>
+                    <option value="small">small</option>
+                    <option value="medium">medium</option>
+                    <option value="large">Large</option>
+                    <option value="van">Van</option>
+                    </select>
+                @endif
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
         <input class="form-control" name="contact_number" type="number" placeholder="Contact Number">
@@ -71,17 +89,17 @@
 @else
 <form action="/bookings" method="post" class="booking_confirmed p-5">
         @csrf
-        <h4 class="text-center py-3 text-white">Booking Confirmed</h4>
+        <h4 class="text-center py-3 text-white">Booking Request Sent</h4>
         <div class="row">
         <div class="col-xs-12 col-sm-6">
         <input readonly class="form-control" name="name" type="text" placeholder="Name" value="{{ $booking->name }}">
         </div>
         <div class="col-xs-12 col-sm-6">
-        <input readonly class="form-control" name="booking_date" type="date" placeholder="Booking Date" value="{{ $booking->booking_date }}">
+        <input readonly class="form-control" name="booking_date" type="date" placeholder="Booking Date" value="{{ $booking->booking_date->format('Y-m-d')}}">
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
         <select disabled class="form-control" name="flexibility" id="flexibility"">
-        <option selected value="0">{{$booking->flexibility}}</option>
+        <option selected value="0">+/- {{$booking->flexibility}} day</option>
         </select>
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">

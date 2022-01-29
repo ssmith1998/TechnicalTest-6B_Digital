@@ -10,7 +10,9 @@
 </head>
 <body>
 <div class="adminAuthWrapper d-flex flex-column justify-content-center align-items-center">
+<div class="wrapper_inner py-5 px-5 w-100">
 @yield('content')
+</div>
 </div>
 </body>
 </html>

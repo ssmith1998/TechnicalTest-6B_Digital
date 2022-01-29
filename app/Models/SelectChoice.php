@@ -9,7 +9,7 @@ class SelectChoice extends Model
 {
     use HasFactory;
 
-    protected $filled = [
+    protected $fillable = [
         'label',
         'value',
         'type'
