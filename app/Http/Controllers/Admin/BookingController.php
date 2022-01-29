@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\BookingConfirmed;
 use App\Models\Booking;
+use App\Models\SelectChoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -18,12 +19,14 @@ class BookingController extends Controller
      */
     public function bookingForm(Request $request)
     {
+        $flexChoices = SelectChoice::where('type', 'flexibility')->get();
+        $sizeChoices = SelectChoice::where('type', 'vehicle_size')->get();
         if ($request->type === 'Edit'  && $request->has('booking')) {
             $data = Booking::find($request->booking);
         } else {
             $data = null;
         }
-        return view('admin.bookings.bookingsForm', ['type' => $request->type, 'data' => $data]);
+        return view('admin.bookings.bookingsForm', ['type' => $request->type, 'data' => $data, 'sizeChoices' => $sizeChoices, 'flexChoices' => $flexChoices]);
     }
 
     /**

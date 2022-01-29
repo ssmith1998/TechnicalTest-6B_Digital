@@ -4,7 +4,6 @@
 <div class="wrapper_inner py-5 px-5 w-100">
 <div class="top_toolbar__wrapper d-flex justify-content-between">
 <h1 class="text-bold">Dashboard</h1>
-<a href="/admin/logout"><button class="btn btn-danger">Logout</button></a>
 </div>
 <div class="toolbar d-flex justify-content-between">
 <h4>Bookings</h4>
@@ -19,7 +18,6 @@
         {{ session()->get('success') }}
     </div>
 @endif
-@if (isset($bookings) && COUNT($bookings) > 0)
 <table class="table small-table" style="height:200px;">
   <thead>
     <tr>
@@ -33,6 +31,7 @@
     </tr>
   </thead>
   <tbody>
+  @if (isset($bookings) && COUNT($bookings) > 0)
 @foreach ($bookings as $booking)
     @if ($booking->confirmed)
        <tr style="background-color: #22b531; color: #fff;">
@@ -68,6 +67,9 @@
     </tr>
     @endif
 @endforeach
+@else
+      <tr><td colspan="6">There are no records to show.</td></tr>
+    @endif
     
   </tbody>
 </table>   
@@ -76,5 +78,5 @@
 </div>
 
 </div>
-@endif
+
 @endsection

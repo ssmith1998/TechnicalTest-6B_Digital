@@ -22,49 +22,93 @@
         <input class="form-control" name="booking_date" type="date" placeholder="Booking Date" value="{{$data->booking_date->format('Y-m-d')}}">
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
-        <select class="form-control" name="flexibility" id="flexibility">
+        {{-- <select class="form-control" name="flexibility" id="flexibility">
         <option value="0">Flexibility</option>
-        @if (isset($data) && $data->flexibility == 1)
-        <option selected value="1">+/- 1 day</option>
-        @else
-        <option value="1">+/- 1 day</option>
+               @if (isset($data) && $data->flexibility == 1)
+               <option selected value="1">+/- 1 day</option>
+               @else
+               <option value="1">+/- 1 day</option>
+               @endif
+               @if (isset($data) && $data->flexibility == 2)
+               <option selected value="2">+/- 2 day</option>
+               @else
+               <option value="2">+/- 2 day</option>
+               @endif
+               @if (isset($data) && $data->flexibility == 3)
+               <option selected value="1">+/- 3 day</option>
+               @else
+               <option value="1">+/- 3 day</option>
+               @endif
+        </select> --}}
+        @if (isset($flexChoices) && COUNT($flexChoices) > 0)
+         <select class="form-control" name="flexibility" id="flexibility">
+            <option value="0">Flexibility</option>
+            @foreach ($flexChoices as $flex)
+            @if ($data->flexibility === (int)$flex->value)
+               <option selected value="{{$flex->value}}">{{$flex->label}}</option>
+            @else
+               <option value="{{$flex->value}}">{{$flex->label}}</option>
+            @endif
+            @endforeach
+         </select>
+        @else   
+      <select class="form-control" name="flexibility" id="flexibility">
+        <option value="0">Flexibility</option>
+               @if (isset($data) && $data->flexibility == 1)
+               <option selected value="1">+/- 1 day</option>
+               @else
+               <option value="1">+/- 1 day</option>
+               @endif
+               @if (isset($data) && $data->flexibility == 2)
+               <option selected value="2">+/- 2 day</option>
+               @else
+               <option value="2">+/- 2 day</option>
+               @endif
+               @if (isset($data) && $data->flexibility == 3)
+               <option selected value="1">+/- 3 day</option>
+               @else
+               <option value="1">+/- 3 day</option>
+               @endif
+        </select> 
         @endif
-        @if (isset($data) && $data->flexibility == 2)
-        <option selected value="2">+/- 2 day</option>
-        @else
-        <option value="2">+/- 2 day</option>
-        @endif
-        @if (isset($data) && $data->flexibility == 3)
-        <option selected value="1">+/- 3 day</option>
-        @else
-        <option value="1">+/- 3 day</option>
-        @endif
-        </select>
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
-        <select class="form-control" name="vehicle_size" id="vehicle_size">
-        <option value="size">Vehicle Size</option>
-        @if (isset($data) && $data->vehicle_size == 'small')
-     <option selected value="small">Small</option>
-        @else
-        <option value="small">Small</option>
-        @endif
-          @if (isset($data) && $data->vehicle_size == 'medium')
-     <option selected value="medium">Medium</option>
-        @else
-        <option value="medium">Medium</option>
-        @endif
-     @if (isset($data) && $data->vehicle_size == 'large')
-     <option selected value="large">large</option>
-        @else
-        <option value="large">Large</option>
-        @endif
-        @if (isset($data) && $data->vehicle_size == 'van')
-     <option selected value="van">Van</option>
-        @else
-        <option value="van">Van</option>
-        @endif
-        </select>
+      @if (isset($sizeChoices) && COUNT($sizeChoices) > 0)
+         <select class="form-control" name="vehicle_size" id="vehicle_size">
+         <option value="size">Vehicle Size</option>
+         @foreach ($sizeChoices as $size)
+            @if ($data->vehicle_size === $size->value)
+            <option selected value="{{$size->value}}">{{$size->label}}</option>
+            @else
+            <option value="{{$size->value}}">{{$size->label}}</option>
+            @endif
+         @endforeach
+         </select>
+      @else
+         <select class="form-control" name="vehicle_size" id="vehicle_size">
+               <option value="size">Vehicle Size</option>
+               @if (isset($data) && $data->vehicle_size == 'small')
+            <option selected value="small">Small</option>
+               @else
+               <option value="small">Small</option>
+               @endif
+                  @if (isset($data) && $data->vehicle_size == 'medium')
+            <option selected value="medium">Medium</option>
+               @else
+               <option value="medium">Medium</option>
+               @endif
+            @if (isset($data) && $data->vehicle_size == 'large')
+            <option selected value="large">large</option>
+               @else
+               <option value="large">Large</option>
+               @endif
+               @if (isset($data) && $data->vehicle_size == 'van')
+            <option selected value="van">Van</option>
+               @else
+               <option value="van">Van</option>
+               @endif
+      </select> 
+   @endif
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
         <input class="form-control" name="contact_number" type="number" placeholder="Contact Number" value="{{$data->contact_number}}">
@@ -93,21 +137,40 @@
         <input class="form-control" name="booking_date" type="date" placeholder="Booking Date">
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
-        <select class="form-control" name="flexibility" id="flexibility">
-        <option value="0">Flexibility</option>
-        <option value="1">+/- 1 day</option>
-        <option value="2">+/- 2 day</option>
-        <option value="3">+/- 3 day</option>
+         @if (isset($flexChoices) && COUNT($flexChoices) > 0)
+            <select class="form-control" name="flexibility" id="flexibility">
+               <option value="0">Flexibility</option>
+               @foreach ( $flexChoices as $flex)
+               <option value="{{$flex->value}}">{{$flex->label}}</option>
+               @endforeach
+               </select>
+         @else   
+            <select class="form-control" name="flexibility" id="flexibility">
+               <option value="0">Flexibility</option>
+               <option value="1">+/- 1 day</option>
+               <option value="2">+/- 2 day</option>
+               <option value="3">+/- 3 day</option>
+               </select> 
+         @endif
         </select>
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
-        <select class="form-control" name="vehicle_size" id="vehicle_size">
-        <option value="size">Vehicle Size</option>
-        <option value="small">small</option>
-        <option value="medium">medium</option>
-        <option value="large">Large</option>
-        <option value="van">Van</option>
-        </select>
+            @if (isset($sizeChoices) && COUNT($sizeChoices) > 0)
+                  <select class="form-control" name="vehicle_size" id="vehicle_size">
+                  <option value="size">Vehicle Size</option>
+                  @foreach ($sizeChoices as $size)
+                  <option value="{{$size->value}}">{{$size->label}}</option>
+                  @endforeach
+                  </select>
+                  @else
+                  <select class="form-control" name="vehicle_size" id="vehicle_size">
+                  <option value="size">Vehicle Size</option>
+                  <option value="small">small</option>
+                  <option value="medium">medium</option>
+                  <option value="large">Large</option>
+                  <option value="van">Van</option>
+                  </select>
+               @endif
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
         <input class="form-control" name="contact_number" type="number" placeholder="Contact Number">

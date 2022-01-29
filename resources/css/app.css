@@ -8,7 +8,7 @@
 
 .booking_confirmed {
     width: 75%;
-    background-color: #24fc03;
+    background-color: #149c22;
     padding: 10px;
     margin: 0 auto;
 }
@@ -29,4 +29,10 @@
     width: 75%;
     background-color: #0390fc;
     margin: 0 auto;
+}
+
+#nav-main {
+    position: fixed;
+    top: 0px;
+    width: 100%;
 }

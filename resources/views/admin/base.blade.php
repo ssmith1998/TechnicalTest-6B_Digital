@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" type="text/css">
 </head>
 <body>
+<nav class="navbar navbar-light bg-light d-flex justify-content-between px-3 py-2">
+  <span class="navbar-brand mb-0 h1">DJ Valeting</span>
+  <a href="/admin/logout"><button class="btn btn-danger">Logout</button></a>
+</nav>
 <div class="adminWrapper d-flex flex-column justify-content-center align-items-center vh-100">
 @yield('content')
 </div>
