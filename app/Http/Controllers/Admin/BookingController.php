@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\BookingConfirmed;
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -101,6 +103,7 @@ class BookingController extends Controller
     {
         $booking->confirmed = true;
         $booking->save();
+        Mail::to($booking->email_address)->send(new BookingConfirmed($booking));
         return redirect('/admin/dashboard')->with('success', 'Booking Confirmed Succesfully!');
     }
 }
