@@ -72,6 +72,37 @@
 {{ $bookings->links() }}
 </div>
 
+<div class="selectOptions">
+<div class="toolbar__choices d-flex justify-content-between">
+<h4>Choices</h4>
+<a href="/admin/choices/add"><button class="btn btn-success">Add Choice</button></a>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Label</th>
+      <th scope="col">Value</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+  @if(isset($choices) && COUNT($choices) > 0)
+  @foreach ($choices as $choice )
+    <tr>
+      <td>{{$choice->label}}</td>
+      <td>{{$choice->value}}</td>
+      <td>{{$choice->type}}</td>
+    </tr>
+  @endforeach
+  @else
+   <tr>
+      <td><p>There are no records to show</p></td>
+    </tr>
+  @endif
+  </tbody>
+</table>
+</div>
+
 </div>
 @endif
 @endsection
