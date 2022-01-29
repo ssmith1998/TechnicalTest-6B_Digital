@@ -41,14 +41,14 @@
         <div class="col-xs-12 col-sm-6 pt-sm-3">
         @if (isset($flexChoices) && COUNT($flexChoices) > 0)
          <select class="form-control" name="flexibility" id="flexibility">
-            <option value="0">Flexibility</option>
+            <option disabled selected value> -- Select Flexibility -- </option>
             @foreach ( $flexChoices as $flex)
             <option value="{{$flex->value}}">{{$flex->label}}</option>
             @endforeach
             </select>
         @else   
          <select class="form-control" name="flexibility" id="flexibility">
-            <option value="0">Flexibility</option>
+            <option disabled selected value> -- Select Flexibility -- </option>
             <option value="1">+/- 1 day</option>
             <option value="2">+/- 2 day</option>
             <option value="3">+/- 3 day</option>
@@ -58,14 +58,14 @@
         <div class="col-xs-12 col-sm-6 pt-sm-3">
        @if (isset($sizeChoices) && COUNT($sizeChoices) > 0)
                     <select class="form-control" name="vehicle_size" id="vehicle_size">
-                    <option value="size">Vehicle Size</option>
+                    <option disabled selected value> -- Select Vehicle Size -- </option>
                     @foreach ($sizeChoices as $size)
                     <option value="{{$size->value}}">{{$size->label}}</option>
                     @endforeach
                     </select>
                     @else
                     <select class="form-control" name="vehicle_size" id="vehicle_size">
-                    <option value="size">Vehicle Size</option>
+                     <option disabled selected value> -- Select Vehicle Size -- </option>
                     <option value="small">small</option>
                     <option value="medium">medium</option>
                     <option value="large">Large</option>

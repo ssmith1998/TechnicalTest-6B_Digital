@@ -23,7 +23,7 @@
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
         <select class="form-control" name="type" id="type">
-        <option value="0">Type</option>
+            <option disabled selected value> -- Select Type -- </option>
         @if (isset($data) && $data->type == 'flexibility')
         <option selected value="flexibility">Flexibility</option>
         @else
@@ -57,7 +57,7 @@
         </div>
         <div class="col-xs-12 col-sm-6 pt-sm-3">
         <select class="form-control" name="type" id="type">
-        <option value="0">Type</option>
+        <option disabled selected value> -- Select Type -- </option>
         <option value="flexibility">Flexibility</option>
         <option value="vehicle_size">Vehicle Size</option>
         </select>
