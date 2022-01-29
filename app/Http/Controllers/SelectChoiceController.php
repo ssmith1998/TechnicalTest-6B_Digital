@@ -51,16 +51,6 @@ class SelectChoiceController extends Controller
         return redirect('/admin/choices')->with('success', 'Select Choice Created Succesfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
