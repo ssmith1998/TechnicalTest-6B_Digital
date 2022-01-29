@@ -3,7 +3,7 @@
 <h1 class="text-center py-3">{{$type}} Booking</h1>
 
 @if (isset($data))
-<form action="/admin/bookings/{{$data->id}}" method="put" class="booking_form p-5">
+<form action="/admin/bookings/{{$data->id}}" method="post" class="booking_form p-5">
         @csrf
         <h4 class="text-center py-3 text-white">{{$type}} Booking</h4>
         <div class="row">

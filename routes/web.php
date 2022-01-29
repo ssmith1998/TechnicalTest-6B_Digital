@@ -28,5 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('admin/dashboard', [DashboardController::class, 'index']);
     Route::get('admin/booking', [AdminBookingController::class, 'bookingForm']);
     Route::post('admin/bookings', [AdminBookingController::class, 'store']);
-    Route::put('admin/bookings/{booking}', [AdminBookingController::class, 'update']);
+    Route::post('admin/bookings/{booking}', [AdminBookingController::class, 'update']);
+    Route::get('admin/bookings/confirm/{booking}', [AdminBookingController::class, 'setConfirmed']);
+    Route::get('admin/bookings/delete/{booking}', [AdminBookingController::class, 'destroy']);
+    Route::get('admin/logout', [AuthController::class, 'logout']);
 });

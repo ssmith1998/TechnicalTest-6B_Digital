@@ -90,8 +90,17 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Booking $booking)
     {
-        //
+        $booking->delete();
+
+        return redirect('/admin/dashboard')->with('success', 'Booking Deleted Succesfully!');
+    }
+
+    public function setConfirmed(Request $request, Booking $booking)
+    {
+        $booking->confirmed = true;
+        $booking->save();
+        return redirect('/admin/dashboard')->with('success', 'Booking Confirmed Succesfully!');
     }
 }

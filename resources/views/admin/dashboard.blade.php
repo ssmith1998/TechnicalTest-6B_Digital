@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="wrapper_inner py-5 px-5 w-100">
+<div class="top_toolbar__wrapper d-flex justify-content-between">
 <h1 class="text-bold">Dashboard</h1>
+<a href="/admin/logout"><button class="btn btn-danger">Logout</button></a>
+
+</div>
 <div class="toolbar d-flex justify-content-between">
 <h4>Bookings</h4>
 <a href="/admin/booking?type=Add"><button class="btn btn-success">Add Booking</button></a> 
@@ -27,6 +31,23 @@
   </thead>
   <tbody>
 @foreach ($bookings as $booking)
+    @if ($booking->confirmed)
+       <tr style="background-color: #22b531; color: #fff;">
+      <td>{{$booking->name}}</td>
+      <td>{{$booking->email_address}}</td>
+      <td>{{$booking->contact_number}}</td>
+      <td>{{$booking->vehicle_size}}</td>
+      <td>{{$booking->booking_date->format('d-m-Y')}}</td>
+      @if ($booking->flexibility !== 0)
+      <td>+/- {{$booking->flexibility}}</td>
+      @else
+      <td>N/A</td>
+      @endif
+      <td><a href="/admin/booking?type=Edit&booking={{$booking->id}}"><button class="btn btn-primary">Edit</button></a></td>
+      <td><a href="/admin/bookings/delete/{{$booking->id}}"><button class="btn btn-danger">Delete</button></a></td>
+      <td></td>
+    </tr>  
+    @else
    <tr>
       <td>{{$booking->name}}</td>
       <td>{{$booking->email_address}}</td>
@@ -39,9 +60,10 @@
       <td>N/A</td>
       @endif
       <td><a href="/admin/booking?type=Edit&booking={{$booking->id}}"><button class="btn btn-primary">Edit</button></a></td>
-      <td><p>Confirm</p></td>
-      <td><p>Delete</p></td>
+      <td><a href="/admin/bookings/confirm/{{$booking->id}}"><button class="btn btn-success">Confirm</button></a></td>
+      <td><a href="/admin/bookings/delete/{{$booking->id}}"><button class="btn btn-danger">Delete</button></a></td>
     </tr>
+    @endif
 @endforeach
     
   </tbody>
