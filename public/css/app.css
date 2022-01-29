@@ -1,13 +1,13 @@
 .booking_form,
 .choices_form {
-    width: 75%;
+    width: 50%;
     background-color: #0390fc;
     padding: 10px;
     margin: 0 auto;
 }
 
 .booking_confirmed {
-    width: 75%;
+    width: 50%;
     background-color: #149c22;
     padding: 10px;
     margin: 0 auto;
@@ -26,7 +26,7 @@
 }
 
 .login-form {
-    width: 75%;
+    width: 50%;
     background-color: #0390fc;
     margin: 0 auto;
 }
